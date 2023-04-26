@@ -3,20 +3,12 @@
 // //INGRESO DE PERSONA
 
 let nombre = prompt("Ingrese su nombre");
-    // while (nombre != "ESC"){
-        alert (`Hola ${nombre}`);
-        let apellido = prompt("Ingrese su apellido");
-            // while (apellido != "ESC"){
-                alert (`Mucho gusto ${nombre} ${apellido}. Solo te falta unos datos mas...continuemos`);
-                let mail = prompt("ingrese su correo electronico");
-                // while (mail != "ESC"){
-                    alert (`Bienvenido ${nombre} ${apellido}`);
-                // break;
-                // }
-            // break;
-        // }
-    // break;
-// }
+    alert (`Hola ${nombre}`);
+let apellido = prompt("Ingrese su apellido");
+    alert (`Mucho gusto ${nombre} ${apellido}. Solo te falta unos datos mas...continuemos`);
+let mail = prompt("ingrese su correo electronico");
+    alert (`Bienvenido ${nombre} ${apellido}`);
+    
 
 if (nombre === "ESC" || nombre === "" || apellido === "ESC" || apellido === "" || mail === "ESC" || mail === ""){
     alert ("no ingresaste ningun valor valido como para continuar");
@@ -59,11 +51,11 @@ if (nombre === "ESC" || nombre === "" || apellido === "ESC" || apellido === "" |
     let precioTurno = 0
 
     let precioClinicaDescuento = resta(precioClinica,producto(precioClinica,descuento))
-        // console.log(precioClinicaDescuento);
+    
     let precioCirugiaDescuento = resta(precioCirugia,producto(precioCirugia,descuento))
-        // console.log(precioCirugiaDescuento);
+    
     let precioOdontologiaDescuento = resta(precioOdontologia,producto(precioOdontologia,descuento))
-        // console.log(precioOdontologiaDescuento);
+
 
 
     switch (consulta.toLowerCase()){
