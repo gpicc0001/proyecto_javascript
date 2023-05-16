@@ -120,7 +120,9 @@ if (id === "ESC" || id === ""|| nombre === "ESC" || nombre === "" || apellido ==
 const usuario1 = new Personas (id, nombre, apellido, mail, edadnueva);
 
 infoUsuarios.push(usuario1);
+
 console.log(infoUsuarios)
+
 // PRECIOS
 
 const resta = (a, b) => a - b;
