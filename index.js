@@ -87,17 +87,14 @@ if (encontrado){
             }
 
 //CONDICION DE SACADA EN CASO DE NO HABER INGRESADO ALGUN VALOR
-
+let edadnueva = 0
 if (id === "ESC" || id === ""|| nombre === "ESC" || nombre === "" || apellido === "ESC" || apellido === "" || mail === "ESC" || mail === ""){
         alert ("no ingresaste ningun valor valido como para continuar");
     
-    } else if(encontrado){
+    } else if(!encontrado){
         
-        alert("coontinue con la consulta")
-
-    }else{
-
         let edad = parseInt(prompt("ingrese su edad"));
+        edadnueva = edad;
     
         // INTENTOS INGRESO DE EDAD
         if (isNaN(edad)){
@@ -114,6 +111,10 @@ if (id === "ESC" || id === ""|| nombre === "ESC" || nombre === "" || apellido ==
         }else if (edad >= 60){
             alert("Se le otorgara un descuento del 15% sobre el valor del precio de la especialidad que usted eliga")
         }
+        
+    }else{
+        
+        alert("continue con la consulta")
     }
 
 // PRECIOS
@@ -149,7 +150,7 @@ switch (consulta.toLowerCase()){
             precioTurno = precioClinica
         }else if (encontrado && encontrado.edad >= 60){
             precioTurno = precioClinicaDescuento
-        }else if (edad < 60){
+        }else if (edadnueva < 60){
             precioTurno = precioCirugia
         }else {
             precioTurno = precioCirugiaDescuento
@@ -158,7 +159,11 @@ switch (consulta.toLowerCase()){
         break;
     case "cirugia":
         diaSemana("Miercoles", "Viernes");
-        if (edad < 60){
+        if (encontrado && encontrado.edad < 60){
+            precioTurno = precioCirugia
+        }else if (encontrado && encontrado.edad >= 60){
+            precioTurno = precioCirugiaDescuento
+        }else if (edadnueva < 60){
             precioTurno = precioCirugia
         } else {
             precioTurno = precioCirugiaDescuento
@@ -167,7 +172,11 @@ switch (consulta.toLowerCase()){
         break;
     case "odontologia":
         diaSemana("Jueves", "Sabado");
-        if (edad < 60){
+        if (encontrado && encontrado.edad < 60){
+            precioTurno = precioOdontologia
+        }else if (encontrado && encontrado.edad >= 60){
+            precioTurno = precioOdontologiaDescuento
+        }else if (edadnueva < 60){
             precioTurno = precioOdontologia
         } else {
             precioTurno = precioOdontologiaDescuento
