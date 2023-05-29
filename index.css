@@ -4,50 +4,58 @@
     box-sizing: border-box;
 }
 
+ 
+
 html {
     scroll-behavior: smooth;
 }
+
 body {
+
     margin: 0px;
     width: 100%;
     height: 1000px;
     display: grid;
-    grid-template-areas: 
+    grid-template-areas:
     "header"
     "section"
     "footer"    ;
     grid-template-rows: 1fr  1fr 1fr;
     grid-template-columns: auto;
     position: relative;
+
 }
 
+ 
+
 header {
+
     grid-area: header;
     display: grid;
-    
-    grid-template-areas: 
-    
+    grid-template-areas:
     "h1 h1 h1"
     "nav nav nav"
-
     ;
     grid-template-rows: 1fr 1fr;
     grid-template-columns: 25% auto auto;
     background: linear-gradient(to bottom, rgb(14, 156, 192), white);
+
 }
+
 h1 {
-    
     font-size: 72px;
     font-family:'Times New Roman', Times, serif;
     grid-area: h1;
     justify-self: center;
     align-self: center;
     display: flex;
-    
 }
 
+ 
+
 section {
-    grid-template-areas: 
+
+    grid-template-areas:
         "h2"
         "h3"
         "select"
@@ -57,6 +65,7 @@ section {
     grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
     grid-template-columns: 25% auto auto;
     position: relative;
+
     }
 
     h2 {
@@ -67,6 +76,7 @@ section {
         align-self: center;
         padding: 10px;
     }
+
     h3 {
         grid-area: h2;
         font-size: 36px;
@@ -75,48 +85,94 @@ section {
         align-self: center;  
         padding: 10px;
     }
+
     #especialidades {
         grid-area: select;
         font-size: 32px;
         font-family: 'Times New Roman', Times, serif;
         color: rgb(20, 100, 220);
         align-self: center;
-        padding: 2px;
-    }
-    label {
-        grid-area: select;
-        font-size: 32px;
-        font-family: 'Times New Roman', Times, serif;
-        color: rgb(20, 100, 220);
-        align-self: center;
-        padding: 10px;
-    }
+        }
+    
+label {
+    
+    grid-area: select;
 
-    ul{
-        grid-area: ul;
-        font-size: 28px;
-        font-family: 'Times New Roman', Times, serif;
-        color: rgb(0, 0, 0);
-        align-self: center;
-        padding: 10px;
-    }
-    footer{
-        grid-template-areas: 
-        "h4"
-        "h4"
-        "h4"
-    ;
-    grid-template-rows: 1fr 1fr;
-    grid-template-columns: 25% auto auto;
+    font-size: 32px;
+    font-family: 'Times New Roman', Times, serif;
+    color: rgb(20, 100, 220);
+    align-self: center;
+    padding: 10px;
+
+}
+    
+     
+    
+ul{
+    
+    grid-area: ul;
+    font-size: 28px;
+    font-family: 'Times New Roman', Times, serif;
+    color: rgb(0, 0, 0);
+    align-self: center;
+    padding: 10px;
+
+}
+    
+footer{
+    
+    grid-template-areas:
+    "h4"
+    "h4"
+    "h4"
+;
+grid-template-rows: 1fr 1fr;
+grid-template-columns: 25% auto auto;
+position: relative;
+background: linear-gradient(white,rgb(14, 156, 192))
+
+}
+    
+h4 {
+    
+    grid-area: h4;
+    font-size: 24px;
+    font-family:'Times New Roman', Times, serif;
+    color: rgb(0, 0, 0);
+    align-self: center;  
+    padding: 10px;
+    position: fixed;
+
+}
+    
+h5 {
+    
+    font-size: 22px;
+    font-family: 'Times New Roman', Times, serif;
+    color: black;
+    padding: 10px;
     position: relative;
-    background: linear-gradient(white,rgb(14, 156, 192))
-    }
-    h4 {
-        grid-area: h4;
-        font-size: 24px;
-        font-family:'Times New Roman', Times, serif;
-        color: rgb(0, 0, 0);
-        align-self: center;  
-        padding: 10px;
-        position: fixed;
+
+}
+    
+.contenedor{
+    
+    display: flex;
+    justify-content: center;
+        }
+    
+.contenedorFormularioPadre{
+    
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+    
+.form {
+    
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    padding: 4px;
+    height: auto;
     }
