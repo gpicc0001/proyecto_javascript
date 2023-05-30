@@ -1,46 +1,46 @@
-//FORMULARIO DE CONSULTA CON ESTIMACION DE COSTO POR EDAD
+// FORMULARIO DE CONSULTA CON ESTIMACION DE COSTO POR EDAD
 
-//BASE DE DATOS DE USUARIOS
-// const infoUsuarios = [
-//     {id:1, nombre:"Pedro",apellido:"perez",mail: "pp@gmail.com",edad: 23},
-//     {id:2, nombre:"Pablo",apellido:"Hernandez",mail: "ph@gmail.com",edad: 62},
-//     {id:3, nombre:"Mateo",apellido:"fernandez",mail: "mf@gmail.com",edad: 45},
-//     {id:4, nombre:"Paula",apellido:"Tremor",mail: "pt@gmail.com",edad: 34},
-//     {id:5, nombre:"Monica",apellido:"Wagen",mail: "mw@gmail.com",edad: 71}
-// ]
-// //CREADOR DE MODELO DE USUARIOS
-// class Personas {
-//     constructor (id, nombre, apellido, mail, edad){
-//         this.id = id;
-//         this.nombre = nombre;
-//         this.apellido = apellido;
-//         this.mail = mail;
-//         this.edad = edad;
+// BASE DE DATOS DE USUARIOS
+const infoUsuarios = [
+    {id:1, nombre:"Pedro",apellido:"perez",mail: "pp@gmail.com",edad: 23},
+    {id:2, nombre:"Pablo",apellido:"Hernandez",mail: "ph@gmail.com",edad: 62},
+    {id:3, nombre:"Mateo",apellido:"fernandez",mail: "mf@gmail.com",edad: 45},
+    {id:4, nombre:"Paula",apellido:"Tremor",mail: "pt@gmail.com",edad: 34},
+    {id:5, nombre:"Monica",apellido:"Wagen",mail: "mw@gmail.com",edad: 71}
+]
+//CREADOR DE MODELO DE USUARIOS
+class Personas {
+    constructor (id, nombre, apellido, mail, edad){
+        this.id = id;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.mail = mail;
+        this.edad = edad;
         
-//     }
-// }
+    }
+}
 
-// localStorage.setItem("infoUsuarios",JSON.stringify(infoUsuarios))
-// //BASE DE DATOS HISTORIA CLINICA DE CADA USUARIO
+localStorage.setItem("infoUsuarios",JSON.stringify(infoUsuarios))
+//BASE DE DATOS HISTORIA CLINICA DE CADA USUARIO
 
-// const historiaUsuarios = [
-//     {id:1 ,numConsulta:2, tipoConsulta: "Odontologia"},
-//     {id:2 ,numConsulta:5, tipoConsulta: "Clinica"},
-//     {id:3 ,numConsulta:1, tipoConsulta: "Cirugia"},
-//     {id:4 ,numConsulta:11, tipoConsulta: "Odontologia"},
-//     {id:5 ,numConsulta:5, tipoConsulta: "Clinica"},
+const historiaUsuarios = [
+    {id:1 ,numConsulta:2, tipoConsulta: "Odontologia"},
+    {id:2 ,numConsulta:5, tipoConsulta: "Clinica"},
+    {id:3 ,numConsulta:1, tipoConsulta: "Cirugia"},
+    {id:4 ,numConsulta:11, tipoConsulta: "Odontologia"},
+    {id:5 ,numConsulta:5, tipoConsulta: "Clinica"},
 
-// ]
-// //CONSTRUCTOR DE HISTORIA CLINICA - A INGRESAR POR EL CONSULTORIO.
-// class Historial {
-//     constructor (id, numConsulta, tipoConsulta){
-//           this.id = id;
-//           this.numConsulta = numConsulta;
-//           this.tipoConsulta = tipoConsulta;  
-//     }
+]
+//CONSTRUCTOR DE HISTORIA CLINICA - A INGRESAR POR EL CONSULTORIO.
+class Historial {
+    constructor (id, numConsulta, tipoConsulta){
+          this.id = id;
+          this.numConsulta = numConsulta;
+          this.tipoConsulta = tipoConsulta;  
+    }
 
-// }
-// localStorage.setItem("historiaUsuarios",JSON.stringify(historiaUsuarios))
+}
+localStorage.setItem("historiaUsuarios",JSON.stringify(historiaUsuarios))
 
 
 const botones = document.querySelectorAll("#boton") // busco los botones
