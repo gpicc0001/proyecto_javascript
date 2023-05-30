@@ -93,13 +93,13 @@ const mensaje = () => {
     for (const item of usuariologgeado){
 
         divTexto.innerHTML = `<h5> Bienvenido ${item.nombre} </h5>`
+        texto.innerHTML = `Recibira un mail con la confirmacion de inicio de sesión y solicito un llamado del sector`
     }
     
-    botones.forEach((boton) => {
+    
         
-            texto.innerHTML = `Recibira un mail con la confirmacion de inicio de sesión y solicito un llamado del sector`
-        }
-    )
+       
+  
     
     
     contenedor.append(divTexto);
