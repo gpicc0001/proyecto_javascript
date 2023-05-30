@@ -1,46 +1,46 @@
 //FORMULARIO DE CONSULTA CON ESTIMACION DE COSTO POR EDAD
 
 //BASE DE DATOS DE USUARIOS
-const infoUsuarios = [
-    {id:1, nombre:"Pedro",apellido:"perez",mail: "pp@gmail.com",edad: 23},
-    {id:2, nombre:"Pablo",apellido:"Hernandez",mail: "ph@gmail.com",edad: 62},
-    {id:3, nombre:"Mateo",apellido:"fernandez",mail: "mf@gmail.com",edad: 45},
-    {id:4, nombre:"Paula",apellido:"Tremor",mail: "pt@gmail.com",edad: 34},
-    {id:5, nombre:"Monica",apellido:"Wagen",mail: "mw@gmail.com",edad: 71}
-]
-//CREADOR DE MODELO DE USUARIOS
-class Personas {
-    constructor (id, nombre, apellido, mail, edad){
-        this.id = id;
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.mail = mail;
-        this.edad = edad;
+// const infoUsuarios = [
+//     {id:1, nombre:"Pedro",apellido:"perez",mail: "pp@gmail.com",edad: 23},
+//     {id:2, nombre:"Pablo",apellido:"Hernandez",mail: "ph@gmail.com",edad: 62},
+//     {id:3, nombre:"Mateo",apellido:"fernandez",mail: "mf@gmail.com",edad: 45},
+//     {id:4, nombre:"Paula",apellido:"Tremor",mail: "pt@gmail.com",edad: 34},
+//     {id:5, nombre:"Monica",apellido:"Wagen",mail: "mw@gmail.com",edad: 71}
+// ]
+// //CREADOR DE MODELO DE USUARIOS
+// class Personas {
+//     constructor (id, nombre, apellido, mail, edad){
+//         this.id = id;
+//         this.nombre = nombre;
+//         this.apellido = apellido;
+//         this.mail = mail;
+//         this.edad = edad;
         
-    }
-}
+//     }
+// }
 
-localStorage.setItem("infoUsuarios",JSON.stringify(infoUsuarios))
-//BASE DE DATOS HISTORIA CLINICA DE CADA USUARIO
+// localStorage.setItem("infoUsuarios",JSON.stringify(infoUsuarios))
+// //BASE DE DATOS HISTORIA CLINICA DE CADA USUARIO
 
-const historiaUsuarios = [
-    {id:1 ,numConsulta:2, tipoConsulta: "Odontologia"},
-    {id:2 ,numConsulta:5, tipoConsulta: "Clinica"},
-    {id:3 ,numConsulta:1, tipoConsulta: "Cirugia"},
-    {id:4 ,numConsulta:11, tipoConsulta: "Odontologia"},
-    {id:5 ,numConsulta:5, tipoConsulta: "Clinica"},
+// const historiaUsuarios = [
+//     {id:1 ,numConsulta:2, tipoConsulta: "Odontologia"},
+//     {id:2 ,numConsulta:5, tipoConsulta: "Clinica"},
+//     {id:3 ,numConsulta:1, tipoConsulta: "Cirugia"},
+//     {id:4 ,numConsulta:11, tipoConsulta: "Odontologia"},
+//     {id:5 ,numConsulta:5, tipoConsulta: "Clinica"},
 
-]
-//CONSTRUCTOR DE HISTORIA CLINICA - A INGRESAR POR EL CONSULTORIO.
-class Historial {
-    constructor (id, numConsulta, tipoConsulta){
-          this.id = id;
-          this.numConsulta = numConsulta;
-          this.tipoConsulta = tipoConsulta;  
-    }
+// ]
+// //CONSTRUCTOR DE HISTORIA CLINICA - A INGRESAR POR EL CONSULTORIO.
+// class Historial {
+//     constructor (id, numConsulta, tipoConsulta){
+//           this.id = id;
+//           this.numConsulta = numConsulta;
+//           this.tipoConsulta = tipoConsulta;  
+//     }
 
-}
-localStorage.setItem("historiaUsuarios",JSON.stringify(historiaUsuarios))
+// }
+// localStorage.setItem("historiaUsuarios",JSON.stringify(historiaUsuarios))
 // // //INGRESO DE USUARIO
 
 // let sumaId = infoUsuarios.length
@@ -69,16 +69,17 @@ const botones = document.querySelectorAll("#boton") // busco los botones
 let contenedor = document.getElementById("contenedor"); //me traigo el contenedor
 let form = document.getElementById("contenedor_formulario");
 
+
 botones.forEach((boton) => {
 
     boton.addEventListener("click", (e) => {
         let div = document.createElement("div");
-        let formulario = document.createElement("formulario")
+        let formulario = document.createElement("form")
 
-        div.innerHTML = `
-        <h5> Usted está en la especialidad ${e.target.innerHTML}</h5>`
-        ;
+        div.innerHTML = `<h5> Usted está en la especialidad ${e.target.innerHTML}</h5>`;
+        
         div.className = "contenedor"
+        
         formulario.innerHTML = `
         <input type="text" name="nombre" placeholder="Nombre">
         <input type="text" name="apellido" placeholder="Apellido">
@@ -91,30 +92,55 @@ botones.forEach((boton) => {
         formulario.className = "form"
         contenedor.append(div);
         contenedor_formulario.append(formulario);
-
+        enviar(formulario)
     });
 });
 
-formulario.addEventListener("submit", (ele) => {
+const cartel = () => {
 
-    ele.preventDefault();
-    let usuariosStorage = localStorage.getItem("infoUsuarios");
-    let usuarios = JSON.parse(usuariosStorage);
+    div.innerHTML = "";
+    let div2 = document.createElement("div");
+    let texto = document.createElement("p");
 
-    let input = ele.target.children;
-    let usuario = {
+}
 
-        id: usuarios.length + 1,
-        nombre: input[0].value,
-        apellido: input[1].value,
-        mail: input[2].value,
-        edad: input[3].value,
 
-    };
-    usuarios.push(usuario);
-    localStorage.setItem("infoUsuarios",JSON.stringify(usuarios))
 
-})
+
+function enviar(formulario){
+
+    formulario.addEventListener("submit", (ele) => {
+    
+        ele.preventDefault();
+        let usuariosStorage = localStorage.getItem("infoUsuarios");
+        let usuarios = JSON.parse(usuariosStorage);
+    
+        let input = ele.target.children;
+        
+        if (!input[2].value.includes("@")){
+
+            alert("debes ingresar un mail");
+            input[2].value = " ";
+            
+        } else if( usuariosStorage.includes(input[2].value)) {
+
+            alert("ya existe el usuario");
+        
+         }else{
+                let usuario = {
+
+                    id: usuarios.length + 1,
+                    nombre: input[0].value,
+                    apellido: input[1].value,
+                    mail: input[2].value,
+                    edad: input[3].value,
+            
+                };
+                usuarios.push(usuario);
+                localStorage.setItem("infoUsuarios",JSON.stringify(usuarios))
+            }
+    });
+}
 
 let actualizar = document.getElementById("refresh");
 actualizar.addEventListener("click", () =>{
