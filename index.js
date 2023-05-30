@@ -41,38 +41,16 @@
 
 // }
 // localStorage.setItem("historiaUsuarios",JSON.stringify(historiaUsuarios))
-// // //INGRESO DE USUARIO
 
-// let sumaId = infoUsuarios.length
-
-// let id = parseFloat(prompt("ingresa ID")) 
-//     if ( id && id!=isNaN(id)){
-//         id = sumaId + 1
-//     }else{
-//         alert("no ingresaste un valor numerico")
-//         let intentosid = 0
-//         while(intentosid <= 3 && isNaN(id)){
-//             id = parseInt(prompt("ingresa un ID nuevamente"));
-//             intentosid = intentosid + 1;
-//             if (intentosid === 3){
-//                 alert("No ingresaste una id valido");
-//                 break;
-//             }
-//         }
-//     }
-
-// let nombre = prompt("ingresa el nombre");
-// let apellido = prompt("ingresa el apellido");
-// let mail = prompt("ingresa el mail");
 
 const botones = document.querySelectorAll("#boton") // busco los botones
 let contenedor = document.getElementById("contenedor"); //me traigo el contenedor
 let form = document.getElementById("contenedor_formulario");
-
+let usuariologgeado = JSON.parse(localStorage.getItem("infoUsuarios")); 
 
 botones.forEach((boton) => {
-
     boton.addEventListener("click", (e) => {
+        
         let div = document.createElement("div");
         let formulario = document.createElement("form")
 
@@ -93,16 +71,43 @@ botones.forEach((boton) => {
         contenedor.append(div);
         contenedor_formulario.append(formulario);
         enviar(formulario)
+    
     });
+    
 });
 
-const cartel = () => {
+//FUNCION PARA BORRAR EL FORMULARIO DEL DIV.
 
-    div.innerHTML = "";
-    let div2 = document.createElement("div");
+const vaciar = () => {
+    let borrar = document.getElementById("contenedorFormPadre");
+    borrar.innerHTML = "";
+
+    mensaje();
+}
+
+const mensaje = () => {
+    let contenedor = document.getElementById("contenedorFormPadre");
+    let divTexto = document.createElement("div");
     let texto = document.createElement("p");
+    
+    for (const item of usuariologgeado){
+
+        divTexto.innerHTML = `<h5> Bienvenido ${item.nombre} </h5>`
+    }
+    
+    botones.forEach((boton) => {
+        
+            texto.innerHTML = `Recibira un mail con la confirmacion de inicio de sesión y solicito un llamado de el sector de ${boton.innerText}`
+        }
+    )
+    
+    
+    contenedor.append(divTexto);
+    contenedor.append(texto);
+    
 
 }
+
 
 
 
@@ -117,11 +122,15 @@ function enviar(formulario){
     
         let input = ele.target.children;
         
+        //CONDICION DE INGRESO CORRECTO DE MAIL
+
         if (!input[2].value.includes("@")){
 
             alert("debes ingresar un mail");
             input[2].value = " ";
-            
+        
+        //CONDICION DE USUARIO REGISTRADO O NO    
+
         } else if( usuariosStorage.includes(input[2].value)) {
 
             alert("ya existe el usuario");
@@ -138,144 +147,21 @@ function enviar(formulario){
                 };
                 usuarios.push(usuario);
                 localStorage.setItem("infoUsuarios",JSON.stringify(usuarios))
+                
             }
-    });
-}
+          vaciar(); 
+         
+        });
+    }
+    
+
+
+
+
 
 let actualizar = document.getElementById("refresh");
 actualizar.addEventListener("click", () =>{
     location.reload();
 });
 
-
-
-// //CONDICION DE BUSQUEDA PARA VER SI SE LOGGEO ALGUNA VEZ
-
-// const crossplot = () => {
-//         const historiaUsuariosCross = historiaUsuarios.filter(item => item.id === encontrado.id)
-//         console.log(historiaUsuariosCross);
-//         for (const item of historiaUsuariosCross){
-//             let mensaje = ` 
-//             Id: ${item.id},
-//             Cantidad de consultas realizadas: ${item.numConsulta},
-//             Tipo de consulta realizada: ${item.tipoConsulta} `
-//             alert(mensaje);
-//         }
-// }
-// const encontrado = infoUsuarios.find (item => item.mail === mail)
-
-// if (encontrado){
-//     alert(`ya existe una cuenta con ${encontrado.mail}`);
-//     alert(`su ID es: ${encontrado.id}`);
-//     crossplot();
-//         } else {
-//             alert(`de acuerdo, no se ecnuentra en la base de datos, continue con el Login!`);
-//             }
-
-// //CONDICION DE SACADA EN CASO DE NO HABER INGRESADO ALGUN VALOR
-// let edadnueva = 0
-// if (id === "ESC" || id === ""|| nombre === "ESC" || nombre === "" || apellido === "ESC" || apellido === "" || mail === "ESC" || mail === ""){
-//         alert ("no ingresaste ningun valor valido como para continuar");
-    
-//     } else if(!encontrado){
-        
-//         let edad = parseInt(prompt("ingrese su edad"));
-//         edadnueva = edad;
-    
-//         // INTENTOS INGRESO DE EDAD
-//         if (isNaN(edad)){
-//             alert ("Error: no ingresaste una edad valida");
-//             let intentos = 0
-//             while(intentos <= 3 && isNaN(edad)){
-//                 edad = parseInt(prompt("ingrese su edad nuevamente"));
-//                 intentos = intentos + 1;
-//                 if (intentos === 3){
-//                     alert("No ingresaste una edad valida");
-//                     break;
-//                 }
-//             }
-//         }else if (edad >= 60){
-//             alert("Se le otorgara un descuento del 15% sobre el valor del precio de la especialidad que usted eliga")
-//         }
-        
-//     }else{
-        
-//         alert("continue con la consulta")
-//     }
-
-// const usuario1 = new Personas (id, nombre, apellido, mail, edadnueva);
-
-// infoUsuarios.push(usuario1);
-
-// console.log(infoUsuarios)
-
-// // PRECIOS
-
-// const resta = (a, b) => a - b;
-// const producto = (a, b) => a * b;
-
-// let precioClinica = 1000;
-// let precioCirugia = 2000;
-// let precioOdontologia = 3000;
-// let descuento = 0.15;
-// let precioTurno = 0
-
-// let precioClinicaDescuento = resta(precioClinica,producto(precioClinica,descuento))
-
-// let precioCirugiaDescuento = resta(precioCirugia,producto(precioCirugia,descuento))
-
-// let precioOdontologiaDescuento = resta(precioOdontologia,producto(precioOdontologia,descuento))
-
-
-// // //inicio consulta
-
-// function diaSemana (dia1, dia2) {
-//     alert (`turno disponible los dias ${dia1}, ${dia2}`);
-// }
-
-// let consulta = prompt(`ingrese una de las siguientes especialidades por la cual desea consultar: clinica, cirugia u odontologia`)
-    
-// switch (consulta.toLowerCase()){
-//     case "clinica":
-//         diaSemana("Lunes", "Martes");
-//         if (encontrado && encontrado.edad < 60){
-//             precioTurno = precioClinica
-//         }else if (encontrado && encontrado.edad >= 60){
-//             precioTurno = precioClinicaDescuento
-//         }else if (edadnueva < 60){
-//             precioTurno = precioCirugia
-//         }else {
-//             precioTurno = precioCirugiaDescuento
-//         }
-//         alert (`El precio de la consulta es $${precioTurno}`)
-//         break;
-//     case "cirugia":
-//         diaSemana("Miercoles", "Viernes");
-//         if (encontrado && encontrado.edad < 60){
-//             precioTurno = precioCirugia
-//         }else if (encontrado && encontrado.edad >= 60){
-//             precioTurno = precioCirugiaDescuento
-//         }else if (edadnueva < 60){
-//             precioTurno = precioCirugia
-//         } else {
-//             precioTurno = precioCirugiaDescuento
-//         }
-//         alert (`El precio de la consulta es $${precioTurno}`)
-//         break;
-//     case "odontologia":
-//         diaSemana("Jueves", "Sabado");
-//         if (encontrado && encontrado.edad < 60){
-//             precioTurno = precioOdontologia
-//         }else if (encontrado && encontrado.edad >= 60){
-//             precioTurno = precioOdontologiaDescuento
-//         }else if (edadnueva < 60){
-//             precioTurno = precioOdontologia
-//         } else {
-//             precioTurno = precioOdontologiaDescuento
-//         }   
-//         alert (`El precio de la consulta es $${precioTurno}`)
-//         break;
-//     default:
-//         alert (`la especialidad ${consulta} no se encuentra disponible por el momento. Disculpe las molestias`)
-// }
 
