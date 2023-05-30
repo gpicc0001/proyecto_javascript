@@ -97,7 +97,7 @@ const mensaje = () => {
     
     botones.forEach((boton) => {
         
-            texto.innerHTML = `Recibira un mail con la confirmacion de inicio de sesión y solicito un llamado de el sector de ${boton.innerText}`
+            texto.innerHTML = `Recibira un mail con la confirmacion de inicio de sesión y solicito un llamado del sector`
         }
     )
     
