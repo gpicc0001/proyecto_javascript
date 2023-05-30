@@ -1,52 +1,53 @@
-// FORMULARIO DE CONSULTA CON ESTIMACION DE COSTO POR EDAD
+// // FORMULARIO DE CONSULTA CON ESTIMACION DE COSTO POR EDAD
 
-// BASE DE DATOS DE USUARIOS
-const infoUsuarios = [
-    {id:1, nombre:"Pedro",apellido:"perez",mail: "pp@gmail.com",edad: 23},
-    {id:2, nombre:"Pablo",apellido:"Hernandez",mail: "ph@gmail.com",edad: 62},
-    {id:3, nombre:"Mateo",apellido:"fernandez",mail: "mf@gmail.com",edad: 45},
-    {id:4, nombre:"Paula",apellido:"Tremor",mail: "pt@gmail.com",edad: 34},
-    {id:5, nombre:"Monica",apellido:"Wagen",mail: "mw@gmail.com",edad: 71}
-]
-//CREADOR DE MODELO DE USUARIOS
-class Personas {
-    constructor (id, nombre, apellido, mail, edad){
-        this.id = id;
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.mail = mail;
-        this.edad = edad;
+// // BASE DE DATOS DE USUARIOS
+// const infoUsuarios = [
+//     {id:1, nombre:"Pedro",apellido:"perez",mail: "pp@gmail.com",edad: 23},
+//     {id:2, nombre:"Pablo",apellido:"Hernandez",mail: "ph@gmail.com",edad: 62},
+//     {id:3, nombre:"Mateo",apellido:"fernandez",mail: "mf@gmail.com",edad: 45},
+//     {id:4, nombre:"Paula",apellido:"Tremor",mail: "pt@gmail.com",edad: 34},
+//     {id:5, nombre:"Monica",apellido:"Wagen",mail: "mw@gmail.com",edad: 71}
+// ]
+// //CREADOR DE MODELO DE USUARIOS
+// class Personas {
+//     constructor (id, nombre, apellido, mail, edad){
+//         this.id = id;
+//         this.nombre = nombre;
+//         this.apellido = apellido;
+//         this.mail = mail;
+//         this.edad = edad;
         
-    }
-}
+//     }
+// }
 
-localStorage.setItem("infoUsuarios",JSON.stringify(infoUsuarios))
-//BASE DE DATOS HISTORIA CLINICA DE CADA USUARIO
+// localStorage.setItem("infoUsuarios",JSON.stringify(infoUsuarios))
+// //BASE DE DATOS HISTORIA CLINICA DE CADA USUARIO
 
-const historiaUsuarios = [
-    {id:1 ,numConsulta:2, tipoConsulta: "Odontologia"},
-    {id:2 ,numConsulta:5, tipoConsulta: "Clinica"},
-    {id:3 ,numConsulta:1, tipoConsulta: "Cirugia"},
-    {id:4 ,numConsulta:11, tipoConsulta: "Odontologia"},
-    {id:5 ,numConsulta:5, tipoConsulta: "Clinica"},
+// const historiaUsuarios = [
+//     {id:1 ,numConsulta:2, tipoConsulta: "Odontologia"},
+//     {id:2 ,numConsulta:5, tipoConsulta: "Clinica"},
+//     {id:3 ,numConsulta:1, tipoConsulta: "Cirugia"},
+//     {id:4 ,numConsulta:11, tipoConsulta: "Odontologia"},
+//     {id:5 ,numConsulta:5, tipoConsulta: "Clinica"},
 
-]
-//CONSTRUCTOR DE HISTORIA CLINICA - A INGRESAR POR EL CONSULTORIO.
-class Historial {
-    constructor (id, numConsulta, tipoConsulta){
-          this.id = id;
-          this.numConsulta = numConsulta;
-          this.tipoConsulta = tipoConsulta;  
-    }
+// ]
+// //CONSTRUCTOR DE HISTORIA CLINICA - A INGRESAR POR EL CONSULTORIO.
+// class Historial {
+//     constructor (id, numConsulta, tipoConsulta){
+//           this.id = id;
+//           this.numConsulta = numConsulta;
+//           this.tipoConsulta = tipoConsulta;  
+//     }
 
-}
-localStorage.setItem("historiaUsuarios",JSON.stringify(historiaUsuarios))
+// }
+// localStorage.setItem("historiaUsuarios",JSON.stringify(historiaUsuarios))
 
 
 const botones = document.querySelectorAll("#boton") // busco los botones
 let contenedor = document.getElementById("contenedor"); //me traigo el contenedor
 let form = document.getElementById("contenedor_formulario");
 let usuariologgeado = JSON.parse(localStorage.getItem("infoUsuarios")); 
+
 
 botones.forEach((boton) => {
     boton.addEventListener("click", (e) => {
@@ -90,26 +91,15 @@ const mensaje = () => {
     let divTexto = document.createElement("div");
     let texto = document.createElement("p");
     
-    for (const item of usuariologgeado){
-
-        divTexto.innerHTML = `<h5> Bienvenido ${item.nombre} </h5>`
-        texto.innerHTML = `Recibira un mail con la confirmacion de inicio de sesión y solicito un llamado del sector`
-    }
-    
-    
+        divTexto.innerHTML = `<h5> Bienvenid@ </h5>`
+        texto.innerHTML = `Recibira un mail con la confirmacion de inicio de sesión y los estarán contactando a la brevedad para gestionar el turno`
         
-       
-  
-    
-    
+   
+   
     contenedor.append(divTexto);
     contenedor.append(texto);
-    
 
 }
-
-
-
 
 
 function enviar(formulario){
@@ -134,7 +124,7 @@ function enviar(formulario){
         } else if( usuariosStorage.includes(input[2].value)) {
 
             alert("ya existe el usuario");
-        
+            vaciar()
          }else{
                 let usuario = {
 
@@ -147,9 +137,10 @@ function enviar(formulario){
                 };
                 usuarios.push(usuario);
                 localStorage.setItem("infoUsuarios",JSON.stringify(usuarios))
-                
+                vaciar();
             }
-          vaciar(); 
+           
+            
          
         });
     }
