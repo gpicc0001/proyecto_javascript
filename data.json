@@ -1,0 +1,7 @@
+[
+    {"id":1, "nombre":"Pedro","apellido":"perez","mail": "pp@gmail.com","edad": 23},
+    {"id":2, "nombre":"Pablo","apellido":"Hernandez","mail": "ph@gmail.com","edad": 62},
+    {"id":3, "nombre":"Mateo","apellido":"fernandez","mail": "mf@gmail.com","edad": 45},
+    {"id":4, "nombre":"Paula","apellido":"Tremor","mail": "pt@gmail.com","edad": 34},
+    {"id":5, "nombre":"Monica","apellido":"Wagen","mail": "mw@gmail.com","edad": 71}
+]

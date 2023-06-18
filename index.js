@@ -1,158 +1,226 @@
-// // FORMULARIO DE CONSULTA CON ESTIMACION DE COSTO POR EDAD
+const lista = document.getElementById("listado")
 
-// // BASE DE DATOS DE USUARIOS
-// const infoUsuarios = [
-//     {id:1, nombre:"Pedro",apellido:"perez",mail: "pp@gmail.com",edad: 23},
-//     {id:2, nombre:"Pablo",apellido:"Hernandez",mail: "ph@gmail.com",edad: 62},
-//     {id:3, nombre:"Mateo",apellido:"fernandez",mail: "mf@gmail.com",edad: 45},
-//     {id:4, nombre:"Paula",apellido:"Tremor",mail: "pt@gmail.com",edad: 34},
-//     {id:5, nombre:"Monica",apellido:"Wagen",mail: "mw@gmail.com",edad: 71}
-// ]
-// //CREADOR DE MODELO DE USUARIOS
-// class Personas {
-//     constructor (id, nombre, apellido, mail, edad){
-//         this.id = id;
-//         this.nombre = nombre;
-//         this.apellido = apellido;
-//         this.mail = mail;
-//         this.edad = edad;
-        
-//     }
-// }
-
-// localStorage.setItem("infoUsuarios",JSON.stringify(infoUsuarios))
-// //BASE DE DATOS HISTORIA CLINICA DE CADA USUARIO
-
-// const historiaUsuarios = [
-//     {id:1 ,numConsulta:2, tipoConsulta: "Odontologia"},
-//     {id:2 ,numConsulta:5, tipoConsulta: "Clinica"},
-//     {id:3 ,numConsulta:1, tipoConsulta: "Cirugia"},
-//     {id:4 ,numConsulta:11, tipoConsulta: "Odontologia"},
-//     {id:5 ,numConsulta:5, tipoConsulta: "Clinica"},
-
-// ]
-// //CONSTRUCTOR DE HISTORIA CLINICA - A INGRESAR POR EL CONSULTORIO.
-// class Historial {
-//     constructor (id, numConsulta, tipoConsulta){
-//           this.id = id;
-//           this.numConsulta = numConsulta;
-//           this.tipoConsulta = tipoConsulta;  
-//     }
-
-// }
-// localStorage.setItem("historiaUsuarios",JSON.stringify(historiaUsuarios))
-
-
-const botones = document.querySelectorAll("#boton") // busco los botones
-let contenedor = document.getElementById("contenedor"); //me traigo el contenedor
-let form = document.getElementById("contenedor_formulario");
-let usuariologgeado = JSON.parse(localStorage.getItem("infoUsuarios")); 
-
-
-botones.forEach((boton) => {
-    boton.addEventListener("click", (e) => {
-        
+const botonFormulario = document.getElementById("boton")
+    boton.addEventListener("click", () => {
+            
         let div = document.createElement("div");
         let formulario = document.createElement("form")
 
-        div.innerHTML = `<h5> Usted está en la especialidad ${e.target.innerHTML}</h5>`;
+        // div.innerHTML = `<h5> Usted está en la especialidad ${e.target.innerHTML}</h5>`;
         
         div.className = "contenedor"
         
         formulario.innerHTML = `
-        <input type="text" name="nombre" placeholder="Nombre">
-        <input type="text" name="apellido" placeholder="Apellido">
-        <input type="text" name="mail" placeholder="Mail">
-        <input type="number" name="edad" placeholder="Edad">
+        <input type="text" id="nombre" name="nombre" placeholder="Nombre">
+        <input type="text" id="apellido" name="apellido" placeholder="Apellido">
+        <input type="text" id="mail" name="mail" placeholder="Mail">
+        <input type="number" id="edad" name="edad" placeholder="Edad">
         <input type="submit" id="submit" value="Enviar">
         `;
 
-        formulario.className = "contenedorFormularioPadre"
-        formulario.className = "form"
+        // formulario.className = "contenedorFormularioPadre"
+        // formulario.className = "form"
         contenedor.append(div);
         contenedor_formulario.append(formulario);
         enviar(formulario)
-    
+
     });
+
     
-});
-
-//FUNCION PARA BORRAR EL FORMULARIO DEL DIV.
-
-const vaciar = () => {
-    let borrar = document.getElementById("contenedorFormPadre");
-    borrar.innerHTML = "";
-
-    mensaje();
-}
-
-const mensaje = () => {
-    let contenedor = document.getElementById("contenedorFormPadre");
-    let divTexto = document.createElement("div");
-    let texto = document.createElement("p");
-    
-        divTexto.innerHTML = `<h5> Bienvenid@ </h5>`
-        texto.innerHTML = `Recibira un mail con la confirmacion de inicio de sesión y los estarán contactando a la brevedad para gestionar el turno`
+    function enviar(formulario){
         
-   
-   
-    contenedor.append(divTexto);
-    contenedor.append(texto);
+        formulario.addEventListener("submit", (ele) => {
+            ele.preventDefault();
 
-}
-
-
-function enviar(formulario){
-
-    formulario.addEventListener("submit", (ele) => {
-    
-        ele.preventDefault();
-        let usuariosStorage = localStorage.getItem("infoUsuarios");
-        let usuarios = JSON.parse(usuariosStorage);
-    
-        let input = ele.target.children;
-        
-        //CONDICION DE INGRESO CORRECTO DE MAIL
-
-        if (!input[2].value.includes("@")){
-
-            alert("debes ingresar un mail");
-            input[2].value = " ";
-        
-        //CONDICION DE USUARIO REGISTRADO O NO    
-
-        } else if( usuariosStorage.includes(input[2].value)) {
-
-            alert("ya existe el usuario");
-            vaciar()
-         }else{
-                let usuario = {
-
-                    id: usuarios.length + 1,
-                    nombre: input[0].value,
-                    apellido: input[1].value,
-                    mail: input[2].value,
-                    edad: input[3].value,
+            const nombre = document.getElementById("nombre").value;
+            const apellido = document.getElementById('apellido').value;
+            const mail = document.getElementById('mail').value;
+            const edad = document.getElementById('edad').value;
             
-                };
-                usuarios.push(usuario);
-                localStorage.setItem("infoUsuarios",JSON.stringify(usuarios))
-                vaciar();
+            let usuarioNuevo = {
+                
+                nombre: nombre,
+                apellido: apellido,
+                mail: mail,
+                edad: edad,
             }
-           
-            
-         
+
+            traerDatos(usuarioNuevo);
+                
+        });
+    }   
+    
+    const selector = document.getElementById("selector");
+    
+    
+    const selectorEdades = async () => {
+        const response = await fetch("./data.json")
+        const data = await response.json();
+
+        switch (selector.value){
+            case "opcion1":
+                data.find(usuario => {
+                    if(usuario.edad <= 18){
+                        const li = document.createElement("li");
+                                li.innerHTML = `
+                                <h2>Nombre: ${usuario.nombre}</h2>
+                                <h3>Apellido: ${usuario.apellido}</h3>
+                                <p>Mail: ${usuario.mail}</p>
+                                <p>Edad: ${usuario.edad}</p>
+                                <hr />
+                                `;
+                                lista.append(li)
+                    }else{
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: 'No hay usuarios menores de 18 años',
+                            footer: '<a href="">Why do I have this issue?</a>'
+                          })
+                    }
+                });
+                break;
+            case "opcion2":
+                data.find(usuario => {
+                    if(usuario.edad > 18 && usuario.edad < 60){
+                        const li = document.createElement("li");
+                                li.innerHTML = `
+                                <h2>Nombre: ${usuario.nombre}</h2>
+                                <h3>Apellido: ${usuario.apellido}</h3>
+                                <p>Mail: ${usuario.mail}</p>
+                                <p>Edad: ${usuario.edad}</p>
+                                <hr />
+                                `;
+                                lista.append(li)
+                    }else{
+                        
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: 'No hay usuarios entre ese rango de edades',
+                            footer: '<a href="">Why do I have this issue?</a>'
+                          })
+                    }
+                });
+                break;
+            case "opcion3":
+                data.find(usuario => {
+                    if(usuario.edad > 60 && usuario.edad < 90){
+                        const li = document.createElement("li");
+                                li.innerHTML = `
+                                <h2>Nombre: ${usuario.nombre}</h2>
+                                <h3>Apellido: ${usuario.apellido}</h3>
+                                <p>Mail: ${usuario.mail}</p>
+                                <p>Edad: ${usuario.edad}</p>
+                                <hr />
+                                `;
+                                lista.append(li)
+                    }else{
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: 'No hay usuarios entre ese rango de edades',
+                            footer: '<a href="">Why do I have this issue?</a>'
+                            })
+                    }
+                });
+                break;
+            case "opcion4":
+                data.find(usuario => {
+                    if(usuario.edad >= 90){
+                        const li = document.createElement("li");
+                                li.innerHTML = `
+                                <h2>Nombre: ${usuario.nombre}</h2>
+                                <h3>Apellido: ${usuario.apellido}</h3>
+                                <p>Mail: ${usuario.mail}</p>
+                                <p>Edad: ${usuario.edad}</p>
+                                <hr />
+                                `;
+                                lista.append(li)
+                    }else{
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: 'No hay usuarios mayores de 90 años',
+                            footer: '<a href="">Why do I have this issue?</a>'
+                            })
+                    }
+                });
+                break;
+            default:
+                Swal.fire(
+                    'Queres elegir otra opción?',
+                    'No es una opción válida la elegida',
+                    'question'
+                  )
+        }
+        
+    }
+
+    selector.addEventListener("change", selectorEdades);
+
+
+
+    const verUsuarios = document.getElementById("verUsuarios");
+
+
+    const mostrar = async () => {
+        const response = await fetch("./data.json")
+        const data = await response.json();
+
+        data.forEach(usuario => {
+            const li = document.createElement("li");
+                    li.innerHTML = `
+                    <h2>Nombre: ${usuario.nombre}</h2>
+                    <h3>Apellido: ${usuario.apellido}</h3>
+                    <p>Mail: ${usuario.mail}</p>
+                    <p>Edad: ${usuario.edad}</p>
+                    <hr />
+                    
+                    `;
+                    lista.append(li)
         });
     }
+    verUsuarios.addEventListener("click", mostrar)
     
+    
+    const traerDatos = async (usuarioNuevo) => {
 
+            const response = await fetch("./data.json")
+            const data = await response.json();            
+            data.push(usuarioNuevo)
+            console.log(data);
 
-
-
+            await gaurdarDatos(data);
+            
+            
+        }
+        
+        const gaurdarDatos = async (data) => {
+            
+            const jsonData = JSON.stringify(data);
+            await fetch("./data.json", {
+                method: `POST`,
+                headers: {'Content-Type': 'application/json'},
+                body: jsonData
+                
+            })
+            console.log("datos guardados correctamente");
+        
+        }
+       
 
 let actualizar = document.getElementById("refresh");
-actualizar.addEventListener("click", () =>{
-    location.reload();
+    actualizar.addEventListener("click", () =>{
+
+
+  
+
+    Toastify({
+        text: "This is a toast",  
+        duration: 3000    
+        }).showToast();
+
+    
+        location.reload()
 });
-
-

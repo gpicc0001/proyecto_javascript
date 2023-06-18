@@ -1,79 +1,36 @@
 <!DOCTYPE html>
-
 <html lang="en">
-
 <head>
-
     <meta charset="UTF-8">
-
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <link rel="stylesheet" href="./index.css">
-
-    <title>preEntrega2_Piccardo</title>
-
+    <title>Document</title>
 </head>
-
 <body>
+    <h1>Control de Usuarios</h1>
+    <button id="boton">Formulario consulta</button>
+    <button id="refresh">Actualizar</button>
 
-   <header>
+    <div id="contenedor" class="contenedor"></div>
+            <div class="contenedorFormularioPadre" id="contenedorFormPadre">
+                <div id="contenedor_formulario" class="form"></div>
+            </div>
+    <ul id="listado">Usuarios</ul>
+    <button id="verUsuarios">Ver Usuarios</button>
 
-        <h1>Centro médico</h1>
+    <select name="selector" id="selector">
+       
+        <option value="opcion0" selected>Rango de edades</option>
+        <option value="opcion1">Menores de 18</option>
+        <option value="opcion2">Entre 18 y 60</option>
+        <option value="opcion3">Mayores de 60</option>
+        <option value="opcion4">Mayores de 90</option>
 
-        <nav>
+    </select>
 
- 
-
-        </nav>
-
-   </header>
-
-   <section>
-
-        <h2>Solicite su turno aqui</h2>
-
-        <h3>Seleccione la especialidad por la cual desea consultar</h3>
-
-        <div id="especialidades" class="especialidadClass">
-
-            <button id="boton">Clínica</button>
-
-            <button id="boton">Cirugía</button>
-
-            <button id="boton">Odontología</button>
-
-        </div>
-
-               
-
-        <div id="contenedor" class="contenedor"></div>
-
-        <div class="contenedorFormularioPadre" id="contenedorFormPadre">
-
-            <div id="contenedor_formulario" class="form"></div>
-
-        </div>
-
-        <div>
-
-            <button id="refresh">Actualizar</button>
-
-        </div>
-
-   </section>
-
-   <footer>
-
-        <h4>Si usted posee 60 años o mas, le hacemos un descuento!!</h4>
-
-   </footer>
-
- 
-
-<script src="./index.js"></script>
-
+    
+    <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="./index.js"></script>
 </body>
-
 </html>
